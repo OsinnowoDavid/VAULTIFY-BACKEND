@@ -1,15 +1,19 @@
 import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser"
-
+import connectDB from "./config/mongodB.js"
+import adminRouter from "./routes/adminRouter.js"
 const app = express()
-
-app.use(cors())
+const allowedOrigin =['http://localhost:5173']
+app.use(cors({origin:allowedOrigin, credentials:true}))
 app.use(bodyParser.json());
 
+connectDB()
+
+app.use("/api/admin", adminRouter);
 
 app.get("/", (req, res) => {
-    res.send("Welcome to the home page")
+    res.send("Welcome to Vaultify Backend")
 })
 
 
