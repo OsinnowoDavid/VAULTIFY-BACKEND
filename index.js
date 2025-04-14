@@ -7,9 +7,9 @@ import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
 dotenv.config()
 const app = express()
-// const allowedOrigin =['http://localhost:5173']
+const allowedOrigin =['http://localhost:5173']
 app.use(cors({
-    // origin:allowedOrigin, 
+    origin:allowedOrigin, 
     credentials:true}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
