@@ -2,8 +2,8 @@ import adminModel from "../models/adminSchema.js";
 
 const getUserData = async (req, res) => {
     try {
-        const { Id } = req.body;
-        const user = await adminModel.findById(Id);
+        const { userId } = req.body;
+        const user = await adminModel.findById(userId);
         if (!user) {
             return res.json({ success: false, message: "User not found" });
         }

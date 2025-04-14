@@ -25,13 +25,14 @@ adminRouter.post("/logout", logout);
 adminRouter.post("/sendVerifyOtp",userAuth, sendVerifyOTP);
 adminRouter.post("/verifyAccount", userAuth, verifyEmail);
 adminRouter.get("/isAuth",userAuth, isAuthenticate);
+
 adminRouter.post("/sendRestOtp",userAuth, sendResetOpt);
 adminRouter.post("/resetPasswrod",userAuth, resetpassword);
 
 // adminRouter.get("/getuserdata", getuserdata);
 
 
-adminRouter.get("/getUserData", getUserData)
+adminRouter.get("/getUserData", userAuth, getUserData)
 adminRouter.get("/getAllAdmin", verifyToken, authorizationRole("superadmin"), getAllAdmin);
 adminRouter.post("/registerAdmin", addAdmins);
 adminRouter.get("/getAdminById/:id", verifyToken, authorizationRole("superadmin"), getAdminById);
