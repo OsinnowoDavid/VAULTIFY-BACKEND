@@ -7,12 +7,13 @@ import {
     getAllAdmin,
     loginAdmin,
     logout,
-    sendverifyOTP,
+    sendVerifyOTP,
     verifyEmail,
-    isauthenticate,
+    isAuthenticate,
     resetpassword,
-    sendresetOpt,
+    sendResetOpt,
 } from "../controller/adminController.js";
+import { userAuth } from "../controller/userUth.js";
 import authorizationRole from "../middlewares/rolemiddleware.js";
 import verifyToken from "../middlewares/authmiddlewares.js";
 import { getUserData } from "../controller/usercontroller.js";
@@ -21,11 +22,12 @@ const adminRouter = express.Router();
 
 adminRouter.post("/login", loginAdmin);
 adminRouter.post("/logout", logout);
-adminRouter.post("/sendVerifyOtp", sendverifyOTP);
-adminRouter.post("/verifyAccount", verifyEmail);
-adminRouter.post("/isAuth", isauthenticate);
-adminRouter.post("/sendRestOtp", sendresetOpt);
-adminRouter.post("/resetPasswrod", resetpassword);
+adminRouter.post("/sendVerifyOtp",userAuth, sendVerifyOTP);
+adminRouter.post("/verifyAccount", userAuth, verifyEmail);
+adminRouter.get("/isAuth",userAuth, isAuthenticate);
+adminRouter.post("/sendRestOtp",userAuth, sendResetOpt);
+adminRouter.post("/resetPasswrod",userAuth, resetpassword);
+
 // adminRouter.get("/getuserdata", getuserdata);
 
 

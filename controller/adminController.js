@@ -10,14 +10,13 @@ const isValidEmail = (email) => {
 
 const addAdmins = async (req, res) => {
   const salt = 10;
-  const { 
-    adminName, 
-    adminEmail, 
-    adminRole, 
+  const {
+    adminName,
+    adminEmail,
+    adminRole,
     adminPassword,
     // adminBranch,
-     } =
-    req.body;
+  } = req.body;
 
   try {
     const { error, value } = validate(req.body);
@@ -48,6 +47,7 @@ const addAdmins = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     }); // Updated to "1d"
+    
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -218,7 +218,7 @@ const logout = async (req, res) => {
   }
 };
 
-const sendverifyOTP = async (req, res) => {
+const sendVerifyOTP = async (req, res) => {
   try {
     const { adminEmail } = req.body;
 
@@ -289,7 +289,7 @@ const verifyEmail = async (req, res) => {
   }
 };
 
-const isauthenticate = async (req, res) => {
+const isAuthenticate = async (req, res) => {
   try {
     return res.json({ success: true, message: "user is authenticated" });
   } catch (error) {
@@ -297,7 +297,7 @@ const isauthenticate = async (req, res) => {
   }
 };
 
-const sendresetOpt = async (req, res) => {
+const sendResetOpt = async (req, res) => {
   const { adminEmail } = req.body;
 
   if (!adminEmail) {
@@ -391,9 +391,9 @@ export {
   getAllAdmin,
   loginAdmin,
   logout,
-  sendverifyOTP,
+  sendVerifyOTP,
   verifyEmail,
-  isauthenticate,
-  sendresetOpt,
+  isAuthenticate,
+  sendResetOpt,
   resetpassword,
 };
