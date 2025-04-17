@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser"
 dotenv.config()
 const app = express()
 app.use(express.json())
-const allowedOrigin =['http://localhost:5173']
+const allowedOrigin =['http://localhost:5173',"https://vaultify-omega.vercel.app"]
 app.use(cors({
     origin:allowedOrigin, 
     credentials:true}))
