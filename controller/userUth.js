@@ -2,7 +2,7 @@ import dotenv from "dotenv"
 import jwt from "jsonwebtoken"
 dotenv.config()
 const userAuth = (req, res, next) => {
-  const token = req.cookies.accessToken;
+  const token = req.cookies;
   if (!token) return res.status(401).json({ message: "Unauthorized" });
 
   try {
