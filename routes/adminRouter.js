@@ -33,10 +33,10 @@ adminRouter.post("/resetPasswrod",userAuth, resetpassword);
 
 
 adminRouter.get("/getUserData", userAuth, getUserData)
-adminRouter.get("/getAllAdmin", verifyToken, authorizationRole("superadmin"), getAllAdmin);
+adminRouter.get("/getAllAdmin", userAuth, authorizationRole("superadmin"), getAllAdmin);
 adminRouter.post("/registerAdmin", addAdmins);
-adminRouter.get("/getAdminById/:id", verifyToken, authorizationRole("superadmin"), getAdminById);
+adminRouter.get("/getAdminById/:id", userAuth, authorizationRole("superadmin"), getAdminById);
 adminRouter.delete("/deleteAdmin/:id", deleteAdmin);
-adminRouter.put("/editAdmin/:id", verifyToken, authorizationRole("superadmin"), editAdmin);
+adminRouter.put("/editAdmin/:id", userAuth, authorizationRole("superadmin"), editAdmin);
 
 export default adminRouter;
