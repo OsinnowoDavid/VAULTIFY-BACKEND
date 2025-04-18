@@ -33,7 +33,7 @@ adminRouter.post("/resetPasswrod",userAuth, resetpassword);
 
 
 adminRouter.get("/getUserData", userAuth, getUserData)
-adminRouter.get("/getAllAdmin", userAuth, authorizationRole("superadmin"), getAllAdmin);
+adminRouter.get("/getAllAdmin", userAuth,  getAllAdmin);
 adminRouter.post("/registerAdmin", addAdmins);
 adminRouter.get("/getAdminById/:id", userAuth, authorizationRole("superadmin"), getAdminById);
 adminRouter.delete("/deleteAdmin/:id", deleteAdmin);
