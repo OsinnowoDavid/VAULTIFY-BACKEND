@@ -12,7 +12,7 @@ const allowedOrigin =['http://localhost:5173',"https://vaultify-omega.vercel.app
 app.use(cors({
     origin:allowedOrigin, 
     credentials:true
-    methods: ["GET","POST","PUT","DELETE",],
+,    methods: ["GET","POST","PUT","DELETE"],
         allowedHeaders: ["Content-Type","Authorization"]
 }))
 
