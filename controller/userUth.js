@@ -26,14 +26,15 @@ try {
   const tokenDecode=  jwt.verify(token, process.env.JWT_SECRET)
 
   if(tokenDecode.id){
-    req.body.userId = tokenDecode.id
+    req.user = tokenDecode.id
   } else{ return res.json({success:false, message:"not authorized login again "})
   }
   
 next()
     
 } catch (error) {
-     res.json({success:false, error:message})
+     res.json({success:false, })
+     console.log(error)
     
 }
 }
