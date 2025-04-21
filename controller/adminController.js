@@ -169,12 +169,20 @@ const loginAdmin = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
     ); // Updated to "23h"
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-      maxAge: 23 * 60 * 60 * 1000, // Updated to 23 hours
-    });
+    const isProduction = process.env.NODE_ENV === "production";
+
+res.cookie("token", token, {
+  httpOnly: true,
+  secure: isProduction, // false in development (localhost), true in production
+  sameSite: isProduction ? "none" : "lax", // "none" for cross-site prod, "lax" for localhost dev
+  maxAge: 23 * 60 * 60 * 1000 // 23 hours
+});
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    //   sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    //   maxAge: 23 * 60 * 60 * 1000, // Updated to 23 hours
+    // });
 
     // Access token (short-lived)
     const accessToken = jwt.sign(
