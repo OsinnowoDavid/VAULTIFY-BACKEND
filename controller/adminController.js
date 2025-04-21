@@ -169,7 +169,7 @@ const loginAdmin = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
     ); // Updated to "23h"
-    const isProduction = process.env.NODE_ENV === "production";
+    const isProduction = process.env.NODE_ENV === "development";
 
 res.cookie("token", token, {
   httpOnly: true,
