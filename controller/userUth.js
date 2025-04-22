@@ -10,9 +10,9 @@ const userAuth = async (req, res, next) => {
   try {
     const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
 
-    if (tokenDecode.id) {
-      req.user = tokenDecode.id;
-      return next(); // Proceed if the token is valid
+    if (tokenDecode && tokenDecode.id) {
+      req.user = tokenDecode; // ✅ Now req.user.adminRole will work
+      return next();
     } else {
       return res.status(401).json({ success: false, message: "Not authorized, Login Again" });
     }
@@ -23,6 +23,33 @@ const userAuth = async (req, res, next) => {
 };
 
 export { userAuth };
+
+
+// import jwt from "jsonwebtoken";
+
+// const userAuth = async (req, res, next) => {
+//   const { token } = req.cookies;
+
+//   if (!token) {
+//     return res.status(401).json({ success: false, message: "Not authorized, Login Again" });
+//   }
+
+//   try {
+//     const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
+
+//     if (tokenDecode.id) {
+//       req.user = tokenDecode.id;
+//       return next(); // Proceed if the token is valid
+//     } else {
+//       return res.status(401).json({ success: false, message: "Not authorized, Login Again" });
+//     }
+//   } catch (error) {
+//     console.error("Error in userAuth middleware:", error);
+//     return res.status(401).json({ success: false, message: "Token verification failed, Login Again" });
+//   }
+// };
+
+// export { userAuth };
 
 
 // import dotenv from "dotenv"

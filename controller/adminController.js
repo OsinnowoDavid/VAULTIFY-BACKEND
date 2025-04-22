@@ -110,12 +110,12 @@ const deleteAdmin = async (req, res) => {
 const editAdmin = async (req, res) => {
   try {
     const { id } = req.params;
-    const { adminName, adminEmail, adminRole, adminState } = req.body;
+    const { adminName, adminEmail, adminRole  } = req.body;
 
     const updatedAdmin = await adminModel
       .findByIdAndUpdate(
         id,
-        { adminName, adminEmail, adminRole, adminState },
+        { adminName, adminEmail, adminRole },
         { new: true, runValidators: true }
       )
       .select("-adminPassword");
