@@ -15,8 +15,9 @@ import {
 } from "../controller/adminController.js";
 import { userAuth } from "../controller/userUth.js";
 import authorizationRole from "../middlewares/rolemiddleware.js";
-import verifyToken from "../middlewares/authmiddlewares.js";
+import authenticateUser from "../middlewares/authmiddlewares.js";
 import { getUserData } from "../controller/usercontroller.js";
+
 const adminRouter = express.Router();
 
 
@@ -27,16 +28,16 @@ adminRouter.post("/verifyAccount", userAuth, verifyEmail);
 adminRouter.get("/isAuth",userAuth, isAuthenticate);
 
 adminRouter.post("/sendRestOtp",userAuth, sendResetOpt);
-adminRouter.post("/resetPasswrod",userAuth, resetpassword);
+adminRouter.post("/resetPasswrod",authenticateUser, resetpassword);
 
 // adminRouter.get("/getuserdata", getuserdata);
 
 
 adminRouter.get("/getUserData", userAuth, getUserData)
 adminRouter.get("/getAllAdmin", userAuth,  getAllAdmin);
-adminRouter.post("/registerAdmin", addAdmins);
+adminRouter.post("/registerAdmin",userAuth,authorizationRole('superadmin'), addAdmins);
 adminRouter.get("/getAdminById/:id", userAuth, authorizationRole('superadmin'), getAdminById);
-adminRouter.delete("/deleteAdmin/:id", deleteAdmin);
+adminRouter.delete("/deleteAdmin/:id", authorizationRole('superadmin'),deleteAdmin);
 adminRouter.put("/editAdmin/:id", userAuth, authorizationRole("superadmin"), editAdmin);
 
 export default adminRouter;

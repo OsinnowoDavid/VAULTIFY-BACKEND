@@ -1,27 +1,32 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import adminModel from "../models/adminSchema.js";
 dotenv.config();
 // import jwt from 'jsonwebtoken';
 
-const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'No token provided' });
-  }
-
-  const token = authHeader.split(' ')[1];
-
+const authenticateUser = async (req, res, next) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Replace with your actual secret if hardcoding
-    req.user = decoded; // 👈 This is crucial
-    console.log('✅ Token verified. User:', decoded);
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+
+    if (!token) {
+      return res.status(401).json({ message: "No token provided" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); // Use your actual JWT secret
+    const user = await adminModel.findById(decoded.id);
+
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+
+    req.user = user; // 🔥 This is key!
     next();
-  } catch (err) {
-    console.error('❌ JWT Error:', err.message);
-    return res.status(401).json({ message: 'Invalid or expired token' });
+  } catch (error) {
+    return res.status(401).json({ message: "Unauthorized", error: error.message });
   }
 };
+
+export default authenticateUser;
 
 // export default verifyToken;
 
@@ -54,4 +59,4 @@ const verifyToken = (req, res, next) => {
 //     }
 // };
 
-export default verifyToken;
+// export default verifyToken;
