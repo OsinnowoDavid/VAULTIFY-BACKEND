@@ -22,15 +22,14 @@ const addAdmins = async (req, res) => {
     const { error, value } = validate(req.body);
 
     if (error) {
-      return res.status(400).json({ success: false, message: error.message });
+      return res.status(400).json({ success: false, message: "Check the admin credentials correctly" });
     }
 
     const adminExist = await adminModel.findOne({ adminEmail });
 
     if (adminExist) {
       return res
-        .status(400)
-        .json({ success: false, message: "Admin already created" });
+        .status(400).json({ success: false, message: "Admin already created" });
     }
 
     const hashAdminPassword = await bcrypt.hash(adminPassword, salt);
