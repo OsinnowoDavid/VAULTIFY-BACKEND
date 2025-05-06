@@ -8,6 +8,8 @@ import {
     loginAdmin,
     logout,
     sendVerifyOTP,
+    
+
     verifyEmail,
     isAuthenticate,
     resetpassword,
@@ -23,12 +25,12 @@ const adminRouter = express.Router();
 
 adminRouter.post("/login", loginAdmin);
 adminRouter.post("/logout", logout);
-adminRouter.post("/sendVerifyOtp",userAuth, sendVerifyOTP);
-adminRouter.post("/verifyAccount", userAuth, verifyEmail);
+adminRouter.post("/sendVerify", sendVerifyOTP);
+adminRouter.post("/verifyAccount", verifyEmail);
 adminRouter.get("/isAuth",userAuth, isAuthenticate);
 
-adminRouter.post("/sendRestOtp",userAuth, sendResetOpt);
-adminRouter.post("/resetPasswrod",authenticateUser, resetpassword);
+adminRouter.post("/sendRestOtp", sendResetOpt);
+adminRouter.post("/resetPassword", resetpassword);
 
 // adminRouter.get("/getuserdata", getuserdata);
 

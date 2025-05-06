@@ -379,7 +379,7 @@ const sendResetOpt = async (req, res) => {
 };
 
 const resetpassword = async (req, res) => {
-  const { adminEmail, OTP, newPassword } = req.body;
+  const { adminEmail , OTP, newPassword } = req.body;
 
   if (!adminEmail || !OTP || !newPassword) {
     return res.json({
