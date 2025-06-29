@@ -49,4 +49,16 @@ const updateService = async (req, res) => {
         res.status(500).json({ message: "Error updating service", error: error.message });
     }
 }
-export { registerService, getAllServices, getServiceById, updateService };
+const deleteService = async (req, res) => {
+    try {
+        const serviceId = req.params.id;
+        const deletedService = await ServiceModel.findByIdAndDelete(serviceId);
+        if (!deletedService) {
+            return res.status(404).json({ message: "Service not found" });
+        }
+        res.status(200).json({ message: "Service deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting service", error: error.message });
+    }
+}
+export { registerService, getAllServices, getServiceById, updateService, deleteService };
