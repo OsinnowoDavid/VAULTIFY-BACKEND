@@ -5,7 +5,7 @@ import {
   getGeneralServiceById,
   updateGeneralService,
   deleteGeneralService
-} from "../controller/generalServiceController.js";
+} from "../controller/GeneralServiceController.js";
 
 const GeneralServiceRoutes = express.Router();
 
