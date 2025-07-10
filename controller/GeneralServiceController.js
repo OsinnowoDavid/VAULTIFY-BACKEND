@@ -1,4 +1,4 @@
-import GeneralServiceModel from "../models/GeneralService.js";
+import GeneralServiceModel from "../models/generalService.js";
 
 // Create a new general service
 export const addGeneralService = async (req, res) => {
