@@ -7,10 +7,10 @@ export const addSecurityService = async (req, res) => {
         if (!serviceName || !providerName || !serviceType || !ratingReview || !contactInfo || !availability || !profileDetails) {
             return res.status(400).json({ success: false, message: "All fields are required" });
         }
-        const existing = await SecurityModel.findOne({ serviceName });
-        if (existing) {
-            return res.status(400).json({ success: false, message: "Service already exists" });
-        }
+        // const existing = await SecurityModel.findOne({ serviceName });
+        // if (existing) {
+        //     return res.status(400).json({ success: false, message: "Service already exists" });
+        // }
         const newService = new SecurityModel({ serviceName, providerName, serviceType, ratingReview, contactInfo, availability, profileDetails });
         await newService.save();
         return res.status(201).json({ success: true, message: "Service Added Successfully", service: newService });

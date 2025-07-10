@@ -5,7 +5,7 @@ import {
   getPlumbingServiceById,
   updatePlumbingService,
   deletePlumbingService
-} from "../controller/PlumblingServiceCOntroller.js";
+} from "../controller/PlumblingServiceController.js";
 
 const PlumbingRoutes = express.Router();
 
